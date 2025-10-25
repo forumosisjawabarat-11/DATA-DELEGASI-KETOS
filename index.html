@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Ketua OSIS Wilayah 11 FOJB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #3498db;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .navbar-nav .nav-link {
+            color: rgba(255,255,255,0.85) !important;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: white !important;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.85)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            margin-bottom: 30px;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 15px 20px;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+        }
+        
+        .announcement-item {
+            background-color: white;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .announcement-date {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+        
+        .admin-panel {
+            display: none;
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+        
+        .admin-panel.active {
+            display: block;
+        }
+        
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .table thead th {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            font-weight: 600;
+        }
+        
+        .btn-action {
+            padding: 5px 10px;
+            margin: 0 3px;
+            border-radius: 5px;
+        }
+        
+        .btn-edit {
+            background-color: #f39c12;
+            border-color: #f39c12;
+        }
+        
+        .btn-delete {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        .login-form {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .delegation-input {
+            background-color: #f8f9fa;
+            border: 1px dashed #ccc;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .delegation-input h5 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .delegation-input .form-control {
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-section p {
+                font-size: 1rem;
+            }
+            
+            .card {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="bi bi-mortarboard-fill me-2"></i>FOJB Wilayah 11</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="showSection('home')"><i class="bi bi-house-door me-1"></i> Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('register')"><i class="bi bi-pencil-square me-1"></i> Pendaftaran</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('announcement')"><i class="bi bi-megaphone me-1"></i> Pengumuman</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('about')"><i class="bi bi-info-circle me-1"></i> Tentang FOJB</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('admin')"><i class="bi bi-shield-lock me-1"></i> Admin</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1>Pendaftaran Ketua OSIS Wilayah 11 FOJB</h1>
+            <p>Daftarkan diri Anda sebagai Ketua OSIS dan bawa 5 delegasi terbaik dari sekolah Anda untuk bergabung dalam kegiatan FOJB Wilayah 11</p>
+            <a href="#" class="btn btn-primary btn-lg" onclick="showSection('register')">Daftar Sekarang</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <!-- Home Section -->
+        <section id="home" class="content-section">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="section-title">Selamat Datang di Pendaftaran Ketua OSIS Wilayah 11 FOJB</h2>
+                            <p class="lead">Forum OSIS Jawa Barat (FOJB) Wilayah 11 mengundang seluruh Ketua OSIS untuk mendaftar dan berpartisipasi dalam berbagai kegiatan.</p>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-6 mb-4">
+                                    <div class="d-flex align-items-start">
+                                        <div class="bg-primary text-white rounded-circle p-3 me-3">
+                                            <i class="bi bi-people-fill"></i>
+                                        </div>
+                                        <div>
+                                            <h5>5 Delegasi per Sekolah</h5>
+                                            <p>Setiap Ketua OSIS dapat membawa 5 delegasi terbaik dari sekolahnya.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="d-flex align-items-start">
+                                        <div class="bg-primary text-white rounded-circle p-3 me-3">
+                                            <i class="bi bi-calendar-check"></i>
+                                        </div>
+                                        <div>
+                                            <h5>Pendaftaran Terbuka</h5>
+                                            <p>Segera daftarkan diri Anda dan delegasi sebelum kuota terpenuhi.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="alert alert-info mt-4">
+                                <i class="bi bi-info-circle-fill me-2"></i> Informasi terkait pendaftaran akan diumumkan melalui halaman <a href="#" onclick="showSection('announcement')">Pengumuman</a>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registration Section -->
+        <section id="register" class="content-section" style="display:none;">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Formulir Pendaftaran Ketua OSIS</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="registrationForm">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5>Data Ketua OSIS</h5>
+                                        <div class="mb-3">
+                                            <label for="leaderName" class="form-label">Nama Ketua OSIS</label>
+                                            <input type="text" class="form-control" id="leaderName" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="schoolName" class="form-label">Nama Sekolah</label>
+                                            <input type="text" class="form-control" id="schoolName" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="phone" class="form-label">Nomor HP / WhatsApp</label>
+                                            <input type="tel" class="form-control" id="phone" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="email" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="delegation-input">
+                                            <h5><i class="bi bi-people-fill me-2"></i>Data 5 Delegasi</h5>
+                                            <div class="mb-3">
+                                                <label for="delegate1" class="form-label">Delegasi 1</label>
+                                                <input type="text" class="form-control" id="delegate1" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="delegate2" class="form-label">Delegasi 2</label>
+                                                <input type="text" class="form-control" id="delegate2" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="delegate3" class="form-label">Delegasi 3</label>
+                                                <input type="text" class="form-control" id="delegate3" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="delegate4" class="form-label">Delegasi 4</label>
+                                                <input type="text" class="form-control" id="delegate4" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="delegate5" class="form-label">Delegasi 5</label>
+                                                <input type="text" class="form-control" id="delegate5" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn btn-primary btn-lg">Kirim Pendaftaran</button>
+                                </div>
+                            </form>
+                            
+                            <div id="registrationSuccess" class="alert alert-success mt-4" style="display:none;">
+                                <i class="bi bi-check-circle-fill me-2"></i> Pendaftaran berhasil! Data Anda telah tersimpan.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Announcement Section -->
+        <section id="announcement" class="content-section" style="display:none;">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0"><i class="bi bi-megaphone me-2"></i>Pengumuman Terbaru</h4>
+                        </div>
+                        <div class="card-body">
+                            <div id="announcementsList">
+                                <div class="announcement-item">
+                                    <h5>Pembukaan Pendaftaran Ketua OSIS Wilayah 11</h5>
+                                    <p>Pendaftaran Ketua OSIS Wilayah 11 FOJB telah dibuka. Segera daftarkan diri Anda dan 5 delegasi terbaik dari sekolah Anda.</p>
+                                    <div class="announcement-date">20 Oktober 2023</div>
+                                </div>
+                                
+                                <div class="announcement-item">
+                                    <h5>Technical Meeting untuk Ketua OSIS Terdaftar</h5>
+                                    <p>Bagi Ketua OSIS yang telah mendaftar, diharapkan menghadiri technical meeting yang akan diselenggarakan pada:</p>
+                                    <p><strong>Hari/Tanggal:</strong> Sabtu, 5 November 2023<br>
+                                    <strong>Waktu:</strong> 09.00 - 12.00 WIB<br>
+                                    <strong>Tempat:</strong> Aula FOJB Wilayah 11</p>
+                                    <div class="announcement-date">25 Oktober 2023</div>
+                                </div>
+                                
+                                <div class="announcement-item">
+                                    <h5>Batas Akhir Pendaftaran</h5>
+                                    <p>Pendaftaran akan ditutup pada tanggal 15 November 2023 pukul 23.59 WIB. Pastikan sekolah Anda terdaftar sebelum batas waktu.</p>
+                                    <div class="announcement-date">1 November 2023</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="content-section" style="display:none;">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0"><i class="bi bi-info-circle me-2"></i>Tentang FOJB Wilayah 11</h4>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="mt-3">Apa itu FOJB?</h5>
+                            <p>Forum OSIS Jawa Barat (FOJB) adalah wadah bagi seluruh OSIS SMA/SMK/MA se-Jawa Barat untuk berkoordinasi, berkolaborasi, dan mengembangkan potensi diri serta organisasi.</p>
+                            
+                            <h5 class="mt-4">Wilayah 11 FOJB</h5>
+                            <p>Wilayah 11 FOJB mencakup beberapa daerah di Jawa Barat dengan fokus pada pengembangan kepemimpinan, kreativitas, dan inovasi bagi siswa/siswi SMA/SMK/MA.</p>
+                            
+                            <h5 class="mt-4">Visi dan Misi</h5>
+                            <p><strong>Visi:</strong> Terwujudnya generasi muda yang berkarakter, berprestasi, dan berkontribusi bagi bangsa melalui forum OSIS yang solid.</p>
+                            <p><strong>Misi:</strong></p>
+                            <ul>
+                                <li>Membangun jaringan komunikasi yang efektif antar OSIS</li>
+                                <li>Meningkatkan kapasitas kepemimpinan pengurus OSIS</li>
+                                <li>Mengembangkan program kerja yang inovatif dan bermanfaat</li>
+                                <li>Menjalin kerjasama dengan berbagai pihak untuk kemajuan pendidikan</li>
+                            </ul>
+                            
+                            <h5 class="mt-4">Kegiatan Unggulan</h5>
+                            <p>FOJB Wilayah 11 menyelenggarakan berbagai kegiatan seperti:</p>
+                            <ul>
+                                <li>Pelatihan Kepemimpinan OSIS</li>
+                                <li>Lomba Karya Ilmiah dan Inovasi</li>
+                                <li>Festival Seni dan Budaya</li>
+                                <li>Sosial Kemasyarakatan</li>
+                                <li>Konferensi OSIS Wilayah</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Section -->
+        <section id="admin" class="content-section" style="display:none;">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <!-- Admin Login Form -->
+                    <div id="adminLogin" class="login-form">
+                        <h3 class="text-center mb-4">Login Admin</h3>
+                        <form id="adminLoginForm">
+                            <div class="mb-3">
+                                <label for="adminEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="adminEmail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="adminPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="adminPassword" required>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </div>
+                        </form>
+                        <div id="loginError" class="alert alert-danger mt-3" style="display:none;">
+                            Email atau password salah!
+                        </div>
+                    </div>
+                    
+                    <!-- Admin Panel -->
+                    <div id="adminPanel" class="admin-panel">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h3><i class="bi bi-shield-lock me-2"></i>Admin Panel</h3>
+                            <button class="btn btn-outline-danger" onclick="logoutAdmin()">Logout</button>
+                        </div>
+
+                      <ul class="nav nav-tabs mb-4" id="adminTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="registrants-tab" data-bs-toggle="tab" data-bs-target="#registrants" type="button">Data Pendaftar</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="announcements-tab" data-bs-toggle="tab" data-bs-target="#announcements" type="button">Kelola Pengumuman</button>
+                            </li>
+                        </ul>
+                        
+                        <div class="tab-content" id="adminTabsContent">
+                            <!-- Registrants Tab -->
+                            <div class="tab-pane fade show active" id="registrants" role="tabpanel">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">Data Pendaftar Ketua OSIS</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Nama Ketua</th>
+                                                        <th>Sekolah</th>
+                                                        <th>No. HP</th>
+                                                        <th>Email</th>
+                                                        <th>Delegasi</th>
+                                                        <th>Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="registrantsTableBody">
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Ahmad Rizki</td>
+                                                        <td>SMAN 1 Bandung</td>
+                                                        <td>08123456789</td>
+                                                        <td>ahmad@example.com</td>
+                                                        <td>
+                                                            <ul class="list-unstyled mb-0">
+                                                                <li>1. Budi Santoso</li>
+                                                                <li>2. Siti Nurhaliza</li>
+                                                                <li>3. Rudi Hermawan</li>
+                                                                <li>4. Maya Putri</li>
+                                                                <li>5. Fajar Kurniawan</li>
+                                                            </ul>
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-action btn-edit"><i class="bi bi-pencil"></i></button>
+                                                            <button class="btn btn-sm btn-action btn-delete"><i class="bi bi-trash"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>Dewi Lestari</td>
+                                                        <td>SMK 2 Garut</td>
+                                                        <td>08987654321</td>
+                                                        <td>dewi@example.com</td>
+                                                        <td>
+                                                            <ul class="list-unstyled mb-0">
+                                                                <li>1. Agus Wijaya</li>
+                                                                <li>2. Rina Susanti</li>
+                                                                <li>3. Eko Prasetyo</li>
+                                                                <li>4. Fitri Handayani</li>
+                                                                <li>5. Hendra Gunawan</li>
+                                                            </ul>
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-action btn-edit"><i class="bi bi-pencil"></i></button>
+                                                            <button class="btn btn-sm btn-action btn-delete"><i class="bi bi-trash"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Announcements Tab -->
+                            <div class="tab-pane fade" id="announcements" role="tabpanel">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">Kelola Pengumuman</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="announcementForm">
+                                            <div class="mb-3">
+                                                <label for="announcementTitle" class="form-label">Judul Pengumuman</label>
+                                                <input type="text" class="form-control" id="announcementTitle" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="announcementContent" class="form-label">Isi Pengumuman</label>
+                                                <textarea class="form-control" id="announcementContent" rows="5" required></textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="announcementDate" class="form-label">Tanggal</label>
+                                                <input type="date" class="form-control" id="announcementDate" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Simpan Pengumuman</button>
+                                        </form>
+
+                                      <div class="mt-4">
+                                            <h6>Daftar Pengumuman</h6>
+                                            <div class="list-group">
+                                                <div class="list-group-item">
+                                                    <div class="d-flex justify-content-between">
+                                                        <h6 class="mb-1">Pembukaan Pendaftaran Ketua OSIS Wilayah 11</h6>
+                                                        <small>20 Oktober 2023</small>
+                                                    </div>
+                                                    <p class="mb-1">Pendaftaran Ketua OSIS Wilayah 11 FOJB telah dibuka...</p>
+                                                    <div>
+                                                        <button class="btn btn-sm btn-action btn-edit"><i class="bi bi-pencil"></i></button>
+                                                        <button class="btn btn-sm btn-action btn-delete"><i class="bi bi-trash"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="list-group-item">
+                                                    <div class="d-flex justify-content-between">
+                                                        <h6 class="mb-1">Technical Meeting untuk Ketua OSIS Terdaftar</h6>
+                                                        <small>25 Oktober 2023</small>
+                                                    </div>
+                                                    <p class="mb-1">Bagi Ketua OSIS yang telah mendaftar, diharapkan menghadiri technical meeting...</p>
+                                                    <div>
+                                                        <button class="btn btn-sm btn-action btn-edit"><i class="bi bi-pencil"></i></button>
+                                                        <button class="btn btn-sm btn-action btn-delete"><i class="bi bi-trash"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Forum OSIS Jawa Barat Wilayah 11</h5>
+                    <p>Wadah untuk mengembangkan potensi dan memperluas jaringan bagi seluruh OSIS di Jawa Barat</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Link Penting</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" onclick="showSection('home')" class="text-white">Beranda</a></li>
+                        <li><a href="#" onclick="showSection('register')" class="text-white">Pendaftaran</a></li>
+                        <li><a href="#" onclick="showSection('announcement')" class="text-white">Pengumuman</a></li>
+                        <li><a href="#" onclick="showSection('about')" class="text-white">Tentang FOJB</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Kontak</h5>
+                    <p><i class="bi bi-envelope me-2"></i> info@fojb-wil11.com</p>
+                    <p><i class="bi bi-telephone me-2"></i> (022) 12345678</p>
+                    <p><i class="bi bi-geo-alt me-2"></i> Jl. Pendidikan No. 11, Bandung</p>
+                </div>
+            </div>
+            <hr class="my-4 bg-white">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2023 FOJB Wilayah 11. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simulated database (in real implementation, use Firebase or MySQL)
+        let registrations = [
+            {
+                id: 1,
+                leaderName: "Ahmad Rizki",
+                schoolName: "SMAN 1 Bandung",
+                phone: "08123456789",
+                email: "ahmad@example.com",
+                delegates: [
+                    "Budi Santoso",
+                    "Siti Nurhaliza",
+                    "Rudi Hermawan",
+                    "Maya Putri",
+                    "Fajar Kurniawan"
+                ]
+            },
+            {
+                id: 2,
+                leaderName: "Dewi Lestari",
+                schoolName: "SMK 2 Garut",
+                phone: "08987654321",
+                email: "dewi@example.com",
+                delegates: [
+                    "Agus Wijaya",
+                    "Rina Susanti",
+                    "Eko Prasetyo",
+                    "Fitri Handayani",
+                  "Hendra Gunawan"
+                ]
+            }
+        ];
+        
+        let announcements = [
+            {
+                id: 1,
+                title: "Pembukaan Pendaftaran Ketua OSIS Wilayah 11",
+                content: "Pendaftaran Ketua OSIS Wilayah 11 FOJB telah dibuka. Segera daftarkan diri Anda dan 5 delegasi terbaik dari sekolah Anda.",
+                date: "2023-10-20"
+            },
+            {
+                id: 2,
+                title: "Technical Meeting untuk Ketua OSIS Terdaftar",
+                content: "Bagi Ketua OSIS yang telah mendaftar, diharapkan menghadiri technical meeting yang akan diselenggarakan pada:\nHari/Tanggal: Sabtu, 5 November 2023\nWaktu: 09.00 - 12.00 WIB\nTempat: Aula FOJB Wilayah 11",
+                date: "2023-10-25"
+            },
+            {
+                id: 3,
+                title: "Batas Akhir Pendaftaran",
+                content: "Pendaftaran akan ditutup pada tanggal 15 November 2023 pukul 23.59 WIB. Pastikan sekolah Anda terdaftar sebelum batas waktu.",
+                date: "2023-11-01"
+            }
+        ];
+        
+        // Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).style.display = 'block';
+            
+            // Update active nav link
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Find and activate the clicked link
+            const clickedLink = Array.from(navLinks).find(link => 
+                link.getAttribute('onclick').includes(sectionId)
+            );
+            if (clickedLink) {
+                clickedLink.classList.add('active');
+              }
+        }
+        
+        // Registration Form
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const leaderName = document.getElementById('leaderName').value;
+            const schoolName = document.getElementById('schoolName').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const delegates = [
+                document.getElementById('delegate1').value,
+                document.getElementById('delegate2').value,
+                document.getElementById('delegate3').value,
+                document.getElementById('delegate4').value,
+                document.getElementById('delegate5').value
+            ];
+            
+            // Create new registration object
+            const newRegistration = {
+                id: registrations.length + 1,
+                leaderName,
+                schoolName,
+                phone,
+                email,
+                delegates
+            };
+            
+            // Add to registrations array
+            registrations.push(newRegistration);
+            
+            // Show success message
+            document.getElementById('registrationSuccess').style.display = 'block';
+            
+            // Reset form
+            this.reset();
+            
+            // Scroll to success message
+            document.getElementById('registrationSuccess').scrollIntoView({ behavior: 'smooth' });
+            
+            // Update admin table
+            updateRegistrantsTable();
+        });
+        
+        // Admin Login
+      document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            // Check credentials
+            if (email === 'dutaofindonesian@gmail.com' && password === 'Fojbwilayah11') {
+                // Hide login form
+                document.getElementById('adminLogin').style.display = 'none';
+                
+                // Show admin panel
+                document.getElementById('adminPanel').classList.add('active');
+                
+                // Update tables
+                updateRegistrantsTable();
+                updateAnnouncementsList();
+            } else {
+                // Show error
+                document.getElementById('loginError').style.display = 'block';
+            }
+        });
+        
+        // Logout Admin
+        function logoutAdmin() {
+            // Hide admin panel
+            document.getElementById('adminPanel').classList.remove('active');
+            
+            // Show login form
+            document.getElementById('adminLogin').style.display = 'block';
+            
+            // Reset form
+            document.getElementById('adminLoginForm').reset();
+            
+            // Hide error
+            document.getElementById('loginError').style.display = 'none';
+        }
+        
+        // Update Registrants Table
+        function updateRegistrantsTable() {
+            const tableBody = document.getElementById('registrantsTableBody');
+            tableBody.innerHTML = '';
+            
+            registrations.forEach(reg => {
+                const row = document.createElement('tr');
+                
+                // Create delegates list
+                const delegatesList = reg.delegates.map((delegate, index) => 
+                    <li>${index + 1}. ${delegate}</li>
+                ).join('');
+
+      row.innerHTML = `
+                    <td>${reg.id}</td>
+                    <td>${reg.leaderName}</td>
+                    <td>${reg.schoolName}</td>
+                    <td>${reg.phone}</td>
+                    <td>${reg.email}</td>
+                    <td>
+                        <ul class="list-unstyled mb-0">
+                            ${delegatesList}
+                        </ul>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-action btn-edit" onclick="editRegistration(${reg.id})"><i class="bi bi-pencil"></i></button>
+                        <button class="btn btn-sm btn-action btn-delete" onclick="deleteRegistration(${reg.id})"><i class="bi bi-trash"></i></button>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+        }
+        
+        // Update Announcements List
+        function updateAnnouncementsList() {
+            const announcementsList = document.querySelector('#announcements .list-group');
+            announcementsList.innerHTML = '';
+            
+            announcements.forEach(ann => {
+                const item = document.createElement('div');
+                item.className = 'list-group-item';
+                
+                item.innerHTML = `
+                    <div class="d-flex justify-content-between">
+                        <h6 class="mb-1">${ann.title}</h6>
+                        <small>${formatDate(ann.date)}</small>
+                    </div>
+                    <p class="mb-1">${ann.content.substring(0, 100)}...</p>
+                    <div>
+                        <button class="btn btn-sm btn-action btn-edit" onclick="editAnnouncement(${ann.id})"><i class="bi bi-pencil"></i></button>
+                        <button class="btn btn-sm btn-action btn-delete" onclick="deleteAnnouncement(${ann.id})"><i class="bi bi-trash"></i></button>
+                    </div>
+                `;
+                
+                announcementsList.appendChild(item);
+            });
+        }
+        
+        // Format date
+        function formatDate(dateString) {
+          const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('id-ID', options);
+        }
+        
+        // Announcement Form
+        document.getElementById('announcementForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('announcementTitle').value;
+            const content = document.getElementById('announcementContent').value;
+            const date = document.getElementById('announcementDate').value;
+            
+            // Create new announcement
+            const newAnnouncement = {
+                id: announcements.length + 1,
+                title,
+                content,
+                date
+            };
+            
+            // Add to announcements array
+            announcements.push(newAnnouncement);
+            
+            // Reset form
+            this.reset();
+            
+            // Update lists
+            updateAnnouncementsList();
+            updatePublicAnnouncements();
+            
+            // Show success message
+            alert('Pengumuman berhasil disimpan!');
+        });
+        
+        // Update Public Announcements
+        function updatePublicAnnouncements() {
+            const announcementsList = document.getElementById('announcementsList');
+            announcementsList.innerHTML = '';
+            
+            announcements.forEach(ann => {
+                const item = document.createElement('div');
+                item.className = 'announcement-item';
+                
+                item.innerHTML = `
+                    <h5>${ann.title}</h5>
+                    <p>${ann.content.replace(/\n/g, '<br>')}</p>
+                    <div class="announcement-date">${formatDate(ann.date)}</div>
+                `;
+                
+                announcementsList.appendChild(item);
+            });
+          }
+        
+        // Edit Registration (placeholder function)
+        function editRegistration(id) {
+            alert(Edit pendaftaran dengan ID: ${id});
+        }
+        
+        // Delete Registration (placeholder function)
+        function deleteRegistration(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus data pendaftaran ini?')) {
+                // Remove from array
+                registrations = registrations.filter(reg => reg.id !== id);
+                
+                // Update table
+                updateRegistrantsTable();
+                
+                alert('Data pendaftaran berhasil dihapus!');
+            }
+        }
+        
+        // Edit Announcement (placeholder function)
+        function editAnnouncement(id) {
+            alert(Edit pengumuman dengan ID: ${id});
+        }
+        
+        // Delete Announcement (placeholder function)
+        function deleteAnnouncement(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus pengumuman ini?')) {
+                // Remove from array
+                announcements = announcements.filter(ann => ann.id !== id);
+                
+                // Update lists
+                updateAnnouncementsList();
+                updatePublicAnnouncements();
+                
+                alert('Pengumuman berhasil dihapus!');
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('announcementDate').value = today;
+            
+            // Show home section by default
+            showSection('home');
+        });
+    </script>
+</body>
+</html>
